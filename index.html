@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>IMMO Craft</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>IMMO Craft</h1>
+    <p>Toujours en blocs mais jamais bloqué !</p>
+  </header>
+
+  <div class="container">
+    <div class="filtres">
+      <button onclick="filtrer('All')">Toutes les régions</button>
+      <button onclick="filtrer('Ville')">Ville</button>
+      <button onclick="filtrer('Quartier Japonais')">Quartier Japonais</button>
+      <button onclick="filtrer('Cobble City')">Cobble City</button>
+      <button onclick="filtrer('Campagne')">Campagne</button>
+    </div>
+
+    <div id="catalogue"></div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
