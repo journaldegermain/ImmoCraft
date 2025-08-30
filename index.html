@@ -12,18 +12,25 @@
   </header>
 
   <div class="container">
-    <div class="filtres">
-      <button onclick="filtrer('All')">Toutes les régions</button>
-      <button onclick="filtrer('Ville')">Ville</button>
-      <button onclick="filtrer('Quartier Japonais')">Quartier Japonais</button>
-      <button onclick="filtrer('Cobble City')">Cobble City</button>
-      <button onclick="filtrer('Campagne')">Campagne</button>
+    <div id="connexion">
+      <h2>Connexion</h2>
+      <input type="text" id="pseudo" placeholder="Entrez votre pseudo">
+      <button onclick="seConnecter()">Se connecter</button>
+      <p id="erreur" style="color:red;"></p>
     </div>
 
-    <div id="catalogue"></div>
+    <div id="catalogue-section" style="display:none;">
+      <div class="filtres">
+        <button onclick="filtrer('All')">Toutes les régions</button>
+        <button onclick="filtrer('Ville')">Ville</button>
+        <button onclick="filtrer('Quartier Japonais')">Quartier Japonais</button>
+        <button onclick="filtrer('Cobble City')">Cobble City</button>
+        <button onclick="filtrer('Campagne')">Campagne</button>
+      </div>
+      <div id="catalogue"></div>
+    </div>
   </div>
 
-  <script src="data.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
