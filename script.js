@@ -6,7 +6,60 @@ let currentUser = null;
 let maisons = JSON.parse(localStorage.getItem('maisons')) || [];
 
 // 🔑 Connexion
+function seConnecter() {// Afficher formulaire ajout maison si chef
 function seConnecter() {
+  const pseudo = document.getElementById('pseudo').value;
+  if(!pseudos.includes(pseudo)) {
+    document.getElementById('erreur').innerText = "Pseudo invalide !";
+    return;
+  }
+  currentUser = pseudo;
+  document.getElementById('connexion').style.display = 'none';
+  document.getElementById('catalogue-section').style.display = 'block';
+  afficherMaisons(maisons);
+
+  if(currentUser === "Mikumisquipasse") {
+    alert("Connecté en tant que chef de l'agence !");
+    document.getElementById('ajoutMaison').style.display = 'block';
+  }
+}
+
+// Ajouter une maison
+function ajouterMaison() {
+  const nom = document.getElementById('nomMaison').value;
+  const description = document.getElementById('descriptionMaison').value;
+  const region = document.getElementById('regionMaison').value;
+  const prix = document.getElementById('prixMaison').value.split(',').map(p => p.trim());
+  const photos = [document.getElementById('photoMaison').value.trim()];
+
+  if(!nom || !region || prix.length === 0 || photos[0] === '') {
+    alert("Veuillez remplir tous les champs !");
+    return;
+  }
+
+  const newMaison = {
+    id: Date.now(), // ID unique
+    nom,
+    description,
+    region,
+    prix,
+    photos,
+    vendu: false,
+    visiteEnCours: false
+  };
+
+  maisons.push(newMaison);
+  localStorage.setItem('maisons', JSON.stringify(maisons));
+  afficherMaisons(maisons);
+  alert("Maison ajoutée avec succès !");
+  
+  // Réinitialiser le formulaire
+  document.getElementById('nomMaison').value = '';
+  document.getElementById('descriptionMaison').value = '';
+  document.getElementById('prixMaison').value = '';
+  document.getElementById('photoMaison').value = '';
+}
+
   const pseudo = document.getElementById('pseudo').value;
   if(!pseudos.includes(pseudo)) {
     document.getElementById('erreur').innerText = "Pseudo invalide !";
