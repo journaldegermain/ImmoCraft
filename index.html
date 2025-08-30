@@ -12,39 +12,47 @@
   </header>
 
   <div class="container">
+
+    <!-- Connexion -->
     <div id="connexion">
       <h2>Connexion</h2>
       <input type="text" id="pseudo" placeholder="Entrez votre pseudo">
-      <button onclick="seConnecter()">Se connecter</button>
+      <button class="btn" onclick="seConnecter()">Se connecter</button>
       <p id="erreur" style="color:red;"></p>
     </div>
-<div id="ajoutMaison" style="display:none;">
-  <h2>Ajouter une maison (Chef uniquement)</h2>
-  <input type="text" id="nomMaison" placeholder="Nom de la maison"><br><br>
-  <textarea id="descriptionMaison" placeholder="Description"></textarea><br><br>
-  <select id="regionMaison">
-    <option value="Ville">Ville</option>
-    <option value="Quartier Japonais">Quartier Japonais</option>
-    <option value="Cobble City">Cobble City</option>
-    <option value="Campagne">Campagne</option>
-  </select><br><br>
-  <input type="text" id="prixMaison" placeholder="Prix (séparés par des virgules)"><br><br>
-  <input type="text" id="photoMaison" placeholder="URL de la photo"><br><br>
-  <button onclick="ajouterMaison()">Ajouter la maison</button>
-</div>
 
+    <!-- Formulaire ajout maison (chef uniquement) -->
+    <div id="ajoutMaison" style="display:none;">
+      <h2>Ajouter une maison (Chef uniquement)</h2>
+      <input type="text" id="nomMaison" placeholder="Nom de la maison"><br><br>
+      <textarea id="descriptionMaison" placeholder="Description"></textarea><br><br>
+      <select id="regionMaison">
+        <option value="Ville">Ville</option>
+        <option value="Quartier Japonais">Quartier Japonais</option>
+        <option value="Cobble City">Cobble City</option>
+        <option value="Campagne">Campagne</option>
+      </select><br><br>
+      <input type="text" id="prixMaison" placeholder="Prix (séparés par des virgules)"><br><br>
+      <input type="text" id="photoMaison" placeholder="URL de la photo"><br><br>
+      <button class="btn" onclick="ajouterMaison()">Ajouter la maison</button>
+    </div>
+
+    <!-- Catalogue -->
     <div id="catalogue-section" style="display:none;">
+      <h2>Catalogue des maisons</h2>
       <div class="filtres">
-        <button onclick="filtrer('All')">Toutes les régions</button>
-        <button onclick="filtrer('Ville')">Ville</button>
-        <button onclick="filtrer('Quartier Japonais')">Quartier Japonais</button>
-        <button onclick="filtrer('Cobble City')">Cobble City</button>
-        <button onclick="filtrer('Campagne')">Campagne</button>
+        <button class="btn" onclick="filtrer('All')">Toutes les régions</button>
+        <button class="btn" onclick="filtrer('Ville')">Ville</button>
+        <button class="btn" onclick="filtrer('Quartier Japonais')">Quartier Japonais</button>
+        <button class="btn" onclick="filtrer('Cobble City')">Cobble City</button>
+        <button class="btn" onclick="filtrer('Campagne')">Campagne</button>
       </div>
       <div id="catalogue"></div>
     </div>
+
   </div>
 
   <script src="script.js"></script>
 </body>
 </html>
+
