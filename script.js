@@ -1,29 +1,49 @@
-// Affichage catalogue
+// ✅ Liste des pseudos autorisés
+const pseudos = ["Mikumisquipasse", "Jérémie123", "Pikratchuu"];
+let currentUser = null;
+
+// ✅ Liste des maisons (vide au départ)
+let maisons = JSON.parse(localStorage.getItem('maisons')) || [];
+
+// 🔑 Connexion
+function seConnecter() {
+  const pseudo = document.getElementById('pseudo').value;
+  if(!pseudos.includes(pseudo)) {
+    document.getElementById('erreur').innerText = "Pseudo invalide !";
+    return;
+  }
+  currentUser = pseudo;
+  document.getElementById('connexion').style.display = 'none';
+  document.getElementById('catalogue-section').style.display = 'block';
+  afficherMaisons(maisons);
+  if(currentUser === "Mikumisquipasse") alert("Connecté en tant que chef de l'agence !");
+}
+
+// 🔄 Affichage catalogue
 function afficherMaisons(maisonList) {
   const catalogue = document.getElementById('catalogue');
-  if(!catalogue) return;
   catalogue.innerHTML = '';
 
   maisonList.forEach(m => {
     const div = document.createElement('div');
     div.className = 'carte';
-    
+
     const imgContainer = document.createElement('div');
     imgContainer.style.position = 'relative';
-    
+
     const img = document.createElement('img');
     img.src = m.photos[0];
     img.onclick = () => ouvrirMaison(m.id);
-    
+
     imgContainer.appendChild(img);
-    
+
     if (m.vendu) {
       const vendu = document.createElement('div');
       vendu.className = 'vendu';
       vendu.innerText = 'VENDU';
       imgContainer.appendChild(vendu);
     }
-    
+
     div.appendChild(imgContainer);
 
     const nom = document.createElement('h2');
@@ -34,16 +54,11 @@ function afficherMaisons(maisonList) {
     region.innerText = 'Région : ' + m.region;
     div.appendChild(region);
 
-    const prix = document.createElement('p');
-    prix.className = 'prix';
-    prix.innerText = 'Prix : ' + m.prix.join(', ');
-    div.appendChild(prix);
-
     catalogue.appendChild(div);
   });
 }
 
-// Filtres
+// 🔎 Filtre
 function filtrer(region) {
   if(region === 'All') {
     afficherMaisons(maisons);
@@ -52,19 +67,16 @@ function filtrer(region) {
   }
 }
 
-// Ouvrir maison
+// 🏠 Ouvrir maison
 function ouvrirMaison(id) {
   localStorage.setItem('maisonChoisie', id);
   window.location.href = 'maison.html';
 }
 
-// Afficher toutes les maisons au départ
-afficherMaisons(maisons);
-
-// Maison.html logic
+// ---------------- Maison.html Logic ----------------
 window.addEventListener('DOMContentLoaded', () => {
+  if(!document.getElementById('galerie')) return; // on est pas sur maison.html
   const maisonId = parseInt(localStorage.getItem('maisonChoisie'));
-  if(!maisonId) return;
   const maison = maisons.find(m => m.id === maisonId);
   if(!maison) return;
 
@@ -77,34 +89,40 @@ window.addEventListener('DOMContentLoaded', () => {
     galerie.appendChild(img);
   });
 
-  const prixElem = document.getElementById('prix');
-  if(prixElem) prixElem.innerText = 'Prix : ' + maison.prix.join(', ');
+  document.getElementById('description').innerText = maison.description || "";
+  document.getElementById('prix').innerText = 'Prix : ' + maison.prix.join(', ');
 
   const visiterBtn = document.getElementById('visiterBtn');
   const visiteTermineeBtn = document.getElementById('visiteTermineeBtn');
   const acheterBtn = document.getElementById('acheterBtn');
 
   if(maison.vendu) {
-    if(visiterBtn) visiterBtn.style.display = 'none';
-    if(acheterBtn) acheterBtn.style.display = 'none';
+    visiterBtn.style.display = 'none';
+    acheterBtn.style.display = 'none';
   }
 
-  if(visiterBtn) visiterBtn.onclick = () => {
+  visiterBtn.onclick = () => {
     alert('Notification à Mikumisquipasse : quelqu’un veut visiter cette maison !');
     maison.visiteEnCours = true;
     visiterBtn.style.display = 'none';
-    if(visiteTermineeBtn) visiteTermineeBtn.style.display = 'inline-block';
+    visiteTermineeBtn.style.display = 'inline-block';
   }
 
-  if(visiteTermineeBtn) visiteTermineeBtn.onclick = () => {
+  visiteTermineeBtn.onclick = () => {
     alert('Visite terminée ! Bouton ACHETER débloqué.');
     visiteTermineeBtn.style.display = 'none';
-    if(acheterBtn) acheterBtn.style.display = 'inline-block';
+    acheterBtn.style.display = 'inline-block';
   }
 
-  if(acheterBtn) acheterBtn.onclick = () => {
+  acheterBtn.onclick = () => {
     maison.vendu = true;
     alert('Maison achetée ! Elle est maintenant VENDUE.');
+    acheterBtn.style.display = 'none';
+    localStorage.setItem('maisons', JSON.stringify(maisons));
+    window.location.href = 'index.html';
+  }
+});
+
     acheterBtn.style.display = 'none';
     window.location.href = 'index.html';
   }
