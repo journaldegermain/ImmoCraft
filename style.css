@@ -1,0 +1,70 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background: #1e1e1e;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background: #00ff88;
+  color: #000;
+  padding: 10px;
+  text-align: center;
+}
+
+h1, h2 {
+  margin: 10px 0;
+}
+
+.container {
+  padding: 20px;
+}
+
+.filtres button {
+  margin: 5px;
+  padding: 10px 15px;
+  border: none;
+  background: #00ff88;
+  color: #000;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.filtres button:hover {
+  background: #00cc6a;
+}
+
+.carte {
+  border: 2px solid #00ff88;
+  border-radius: 10px;
+  margin: 20px;
+  padding: 10px;
+  background: #2e2e2e;
+  display: inline-block;
+  width: 300px;
+  vertical-align: top;
+}
+
+.carte img {
+  width: 100%;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.carte .prix {
+  margin: 5px 0;
+  font-weight: bold;
+}
+
+.vendu {
+  color: red;
+  font-size: 24px;
+  font-weight: bold;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(0,0,0,0.7);
+  padding: 5px;
+  border-radius: 5px;
+}
